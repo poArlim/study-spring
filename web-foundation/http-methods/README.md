@@ -5,7 +5,7 @@
 - delete : 리소스 삭제
 
 
-## Response 작정하기 
+## Response 작성하기 
 - ResponseEntity 객체에 status(상태), body(데이터) 담아서 리턴
 
 ```java
