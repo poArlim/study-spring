@@ -16,3 +16,36 @@ back-end 에서 다른 server 와의 연동은 필수이다. RestTemplate 을 �
   - ServerApiController : client 에서 보낸 request 를 받아서 그대로 user 정보를 다시 response 로 돌려준다.
 
 
+## NAVER API 연결하기 
+
+우선 API key 를 발급받아야 한다.
+
+```java
+@GetMapping("/naver")
+public String naver(){
+    String query = "맛집";  // 맛집리스트를 찾아보자
+
+    URI uri = UriComponentsBuilder
+            .fromUriString("https://openapi.naver.com") // 네이버 open api 의
+            .path("/v1/search/local.json")  // 지도검색을 이용하고
+            .queryParam("query", query) // 맛집을 검색어로 던진다.
+            .queryParam("display", 10)
+            .queryParam("start", 1)
+            .queryParam("sort", "random")
+            .encode(Charset.forName("UTF-8")) 
+            .build()
+            .toUri();
+
+    RestTemplate restTemplate = new RestTemplate();
+
+    RequestEntity<Void> req = RequestEntity
+            .get(uri)
+            .header("X-Naver-Client-Id", "")  // 발급받은 API key 의 client-id
+            .header("X-Naver-Client-Secret", "")  // 발급받은 API key 의 client-secret
+            .build();
+
+    ResponseEntity<String> result = restTemplate.exchange(req, String.class); // 맛집리스트가 response 로 String 으로 들어온다.
+
+    return result.getBody();
+}
+```
