@@ -41,8 +41,8 @@ REST API(RESTful API) 는 REST 아키텍처의 제약 조건을 준수하는 에
     - CRUD 기능을 나타내는 것은 URI 에 사용하지 않는다. (GET, POST 등 메서드 형식을 통해 이미 알 수 있다.) (ex. .../users/100/**READ** (X))
     - URI 쿼리 부분으로 컬렉션 결과에 대해서 필터링 할 수 있다. (ex. .../curriculums/web?chapter=2)
     - URI 쿼리는 컬렉션의 결과를 페이지로 구분하여 나타내는데 사용한다. (ex. .../curriculums/web?chapter=2&page=0&size=10&sort=asc)
-    - API 에 있어서 서브 도메인은 일관성 있게 사용해야 한다. (ex. https://api.**.co.kr)
-    - 클라이언트 개발자 포탈 서브 도메인은 일관성 있게 만든다. (ex. https://dev-**.co.kr)
+    - API 에 있어서 서브 도메인은 일관성 있게 사용해야 한다. 
+    - 클라이언트 개발자 포탈 서브 도메인은 일관성 있게 만든다. 
 
 + 메시지를 통한 리소스 조작
   - Web 에서 데이터 전달 방식 : HTML, XML, JSON, TEXT 등
