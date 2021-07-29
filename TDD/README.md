@@ -68,3 +68,71 @@ public class DollarCalculatorTest {
 ```
 
 
+### Spring 테스트 
+spring 에서 테스트 할 때에는 컴포넌트들이 Bean 으로 관리된다는 차이점이 있다.
+
+- 통합테스트 - @SpringBootTest 를 붙여주면 모든 bean 이 다 등록되어 사용할 수 있게 된다.
+```java
+@SpringBootTest
+public class DollarCalculatorTest{
+    
+    @MockBean   // bean 으로 관리되기 때문에 MockBean
+    private MarketApi marketApi;
+    
+    @Autowired
+    private Calculator calculator;
+    
+    ...
+}
+```
+
+
+- 단위테스트 - @WebMvcTest() 하고 필요한 것들만 Import 해서 사용 
+```java
+@WebMvcTest(CalculatorApiController.class)  // 테스트 할 컨트롤러
+@AutoConfigureWebMvc
+@Import({Calculator.class, DollarCalculator.class})
+public class CalculatorApiControllerTest {
+
+	@MockBean
+	public MarketApi marketApi;
+
+	@Autowired
+	private MockMvc mockMvc;	// mvc 를 모킹으로 테스트하겠다.
+
+	@BeforeEach             
+	public void init(){
+		Mockito.when(marketApi.connect()).thenReturn(1100);
+	}
+	
+	@Test
+	public void sumTest() throws Exception{
+		// http://localhose:8080/api/sum 을 테스트할거야
+
+		mockMvc.perform(
+			MockMvcRequestBuilders.get(“http://localhost:8080/api/sum”) // post, put, delete 메서드 넣어서 테스트 가능
+				.queryParam(“x”, “10”)
+				.queryParam(“y”, “10”)
+		).andExpect(				// status 의 기대값 isOk
+			MockMvcResultMatchers.status().isOk()
+		).andExpect(				// content 기대값 22000
+			MockMvcResultMatchers.content().string(“22000”)
+		).andDo(MockMvcResultHandlers.print());		// 테스트 결과 출력
+	}
+}
+```
+
+## Jacoco 
+Java 코드의 테스트 커버리지를 체크하는 라이브러리로 결과를 html, xml, csv 로 확인 가능하다. (테스트 해야 하는 항목을 다 테스트 했는지를 체크해준다.) 
+
+- build.gradle 에 플러그인 추가
+```java
+plugins {
+    ...
+    id 'jacoco'
+}
+```
+
+
+- gradle 의 verification 아래 test 를 클릭하여 실행
+- 결과 : build/reports/jacoco/.../index.html 파일을 열어 확인
