@@ -33,7 +33,7 @@ public class ApiController{
         return x+y;
     }
   
-    @ApiImplicitParams ({   // 위로 빼서 따로 배열형태로 지정해줄 수도 있음
+    @ApiImplicitParams ({   // 메소드 단위로 매개변수를 배열형태로 지정해서 설명해줄 수 있음
             @ApiImplicitParam(name = “x”, value = “x 값”, defualtValue = 20), 
             @ApiImplicitParam(name = “y”, value = “y 값”, defualtValue = 5)
     })
