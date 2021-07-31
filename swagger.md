@@ -3,7 +3,7 @@ Swagger 란 개발한 REST API 를 편리하게 문서화 해주고, 이를 통�
 
 Spring Boot 에서는 간단하게 springfox-boot-starter 를 gradle dependencies 에 추가함으로 사용할 수 있다. 다만, 운영환경과 같은 외부에 노출되면 안 되는 곳에서 사용할 때는 주의해야 한다.
 
-- 서버주소/swagger.ui/ 로 접속하여 확인할 수 있다. (ex. localhost:8080/swagger.ui/)
+- 서버주소/swagger-ui/ 로 접속하여 확인할 수 있다. (ex. localhost:8080/swagger.ui/)
 
 
 - Swagger Annotation 
