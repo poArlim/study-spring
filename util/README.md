@@ -131,7 +131,6 @@ public class YearMonthValidator implements ConstraintValidator<YearMonth, String
 }
 ```
 
-
 ## Exception 처리
 - ControllerAdvice : Global 예외 처리 및 특정 package / Controller 예외처리
 - ExceptionHandler : 특정 Controller 의 예외처리 
@@ -229,7 +228,7 @@ public class GlobalFilter implements Filter {   // Filter 를 구현
 }
 ```
 
-doFilter 를 통해 request, response, chain 이 들어온다. chain.doFilter(..) 앞에 전처리, 뒤에 후처리 코드를 넣어주면 필터를 적용할 수 있다.
+doFilter 를 통해 request, response, chain 이 들어온다. chain.doFilter() 앞에 전처리, 뒤에 후처리 코드를 넣어주면 필터를 적용할 수 있다.
 
 - 작성한 필터를 적용할 때는 SpringBootApplicatoin 에 @ServletComponentScan 어노테이션을 걸어준다.
 
